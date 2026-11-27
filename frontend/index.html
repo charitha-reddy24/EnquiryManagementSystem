@@ -6,57 +6,29 @@
 </head>
 <body>
     <h1>Enquiry Management System</h1>
-    <h2>Enquiry Form</h2>
-    <form>
-
+    <h2>Submit Enquiry</h2>
+    <form id="enquiryForm">
         <label>First Name:</label>
-        <input type="text" id="first_name" placeholder="Enter first name">
+        <input type="text" id="first_name" placeholder="Enter first name" required>
         <br><br>
-
         <label>Last Name:</label>
-        <input type="text" id="last_name" placeholder="Enter last name">
+        <input type="text" id="last_name" placeholder="Enter last name" required>
         <br><br>
-
         <label>Mobile Number:</label>
-        <input type="text" id="mobile" placeholder="Enter mobile number">
+        <input type="text" id="mobile" placeholder="Enter mobile number" required>
         <br><br>
-
         <label>Email:</label>
-        <input type="email" id="email" placeholder="Enter email">
+        <input type="email" id="email" placeholder="Enter email" required>
+        <br><br>
+        <label>Enquiry Details:</label>
+        <textarea id="enquiry_details" placeholder="Enter your enquiry details" required></textarea>
         <br><br>
         <button type="submit">Submit Enquiry</button>
-
     </form>
-
-    <h3>Enquiry List</h3>
-    <!-- SEARCH BOX -->
-
-<input
-    type="text"
-    id="searchInput"
-    placeholder="Search by name, mobile or email"
->
-<button type="button" onclick="searchEnquiries()">Search</button>
-<button type="button" onclick="showAllEnquiries()">Show All</button>
-
-
-<!-- ENQUIRY TABLE -->
-
-    
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Mobile</th>
-                <th>Email</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="enquiryTable">
-        </tbody>
-    </table>
+    <hr>
+    <h2>Manage Enquiries</h2>
+    <button onclick="window.location.href='view.html'">View All Enquiries</button>
+    <button onclick="window.location.href='search.html'">Search Enquiries</button>
     <script src="script.js"></script>
 </body>
 </html>

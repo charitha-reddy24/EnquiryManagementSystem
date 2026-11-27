@@ -1,21 +1,18 @@
 from database import Database
 
-
 class Enquiry:
 
     # CREATE ENQUIRY
-    def add_enquiry(self, first_name, last_name, mobile, email):
-
+    def add_enquiry(self, first_name, last_name, mobile, email, enquiry_details):
         db = Database()
         connection = db.connect()
         cursor = connection.cursor()
 
         query = """
-        INSERT INTO enquiries (first_name, last_name, mobile, email)
-        VALUES (%s, %s, %s, %s)
+        INSERT INTO enquiries (first_name, last_name, mobile, email, enquiry_details)
+        VALUES (%s, %s, %s, %s, %s)
         """
-
-        values = (first_name, last_name, mobile, email)
+        values = (first_name, last_name, mobile, email, enquiry_details)
 
         cursor.execute(query, values)
         connection.commit()
@@ -27,13 +24,11 @@ class Enquiry:
 
     # GET ALL ENQUIRIES
     def get_all_enquiries(self):
-
         db = Database()
         connection = db.connect()
         cursor = connection.cursor(dictionary=True)
 
         query = "SELECT * FROM enquiries"
-
         cursor.execute(query)
 
         enquiries = cursor.fetchall()
@@ -44,8 +39,7 @@ class Enquiry:
         return enquiries
 
     # UPDATE ENQUIRY
-    def update_enquiry(self, enquiry_id, first_name, last_name, mobile, email):
-
+    def update_enquiry(self, enquiry_id, first_name, last_name, mobile, email, enquiry_details):
         db = Database()
         connection = db.connect()
         cursor = connection.cursor()
@@ -55,11 +49,11 @@ class Enquiry:
         SET first_name = %s,
             last_name = %s,
             mobile = %s,
-            email = %s
+            email = %s,
+            enquiry_details = %s
         WHERE id = %s
         """
-
-        values = (first_name, last_name, mobile, email, enquiry_id)
+        values = (first_name, last_name, mobile, email, enquiry_details, enquiry_id)
 
         cursor.execute(query, values)
         connection.commit()
@@ -73,13 +67,11 @@ class Enquiry:
 
     # DELETE ENQUIRY
     def delete_enquiry(self, enquiry_id):
-
         db = Database()
         connection = db.connect()
         cursor = connection.cursor()
 
         query = "DELETE FROM enquiries WHERE id = %s"
-
         values = (enquiry_id,)
 
         cursor.execute(query, values)
@@ -94,7 +86,6 @@ class Enquiry:
 
     # SEARCH ENQUIRIES
     def search_enquiries(self, search_text):
-
         db = Database()
         connection = db.connect()
         cursor = connection.cursor(dictionary=True)
@@ -105,11 +96,13 @@ class Enquiry:
         OR last_name LIKE %s
         OR mobile LIKE %s
         OR email LIKE %s
+        OR enquiry_details LIKE %s
         """
 
         search_value = "%" + search_text + "%"
 
         values = (
+            search_value,
             search_value,
             search_value,
             search_value,
